@@ -1,0 +1,32 @@
+name: lab-ds2-prueba
+
+on:
+  push:
+    branches:
+    - master
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      
+      - name: Run apt get
+        run: sudo apt-get update
+      - name: Run apt upgrade
+        run: sudo apt-get upgrade  
+      - name: Install Dependencies
+        run: npm install
+      - name: Run tests
+        run: npm test  
+      - uses:  AkhileshNS/heroku-deploy@v3.12.12
+        with:
+    # Your Heroku API key. This will be used for authentication. You can find it in your Heroku account settings
+         api_key: 59fc9bcf-efb8-4233-ba90-48a4ee51dd37
+    # The email of your Heroku account (needed for auth).
+         email: "juanestebanortizbejarano@gmail.com"
+    # The app name to use for deploying/updating
+         app_name: "lab-ds2-prueba"
+    # The Heroku branch name that you would like to deploy to (`master` or `main`).
+         heroku_branch: "master"  
+    
